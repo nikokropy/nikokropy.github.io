@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Morse Code Converter</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: linear-gradient(to right, #00FFFF, #800080);
+        }
+
+        #container {
+            text-align: center;
+            padding: 20px;
+            border-radius: 10px;
+            background-color: rgba(255, 255, 255, 0.8);
+        }
+
+        input {
+            padding: 10px;
+            margin-bottom: 10px;
+            width: 80%;
+            box-sizing: border-box;
+        }
+
+        button {
+            padding: 10px;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+    <div id="container">
+        <h1>Morse Code Converter</h1>
+        <input type="text" id="inputText" placeholder="Enter Morse Code">
+        <br>
+        <button onclick="convertMorse()">Convert</button>
+    </div>
+
+    <script>
+        function convertMorse() {
+            const inputText = document.getElementById('inputText').value.trim();
+            const morseRegex = /^[.-\s]+$/;
+
+            if (morseRegex.test(inputText)) {
+                const convertedText = morseToText(inputText);
+                alert(`Converted Text: ${convertedText}`);
+            } else {
+                alert('Invalid Morse Code. Please enter valid Morse Code characters.');
+            }
+        }
+
+        function morseToText(morseCode) {
+            const morseArray = morseCode.split(' ');
+            const textArray = morseArray.map(morseChar => {
+                return MorseCodeMap[morseChar] || ' ';
+            });
+
+            return textArray.join('');
+        }
+
+        const MorseCodeMap = {
+            '.-': 'A',
+            '-...': 'B',
+            '-.-.': 'C',
+            '-..': 'D',
+            '.': 'E',
+            '..-.': 'F',
+            '--.': 'G',
+            '....': 'H',
+            '..': 'I',
+            '.---': 'J',
+            '-.-': 'K',
+            '.-..': 'L',
+            '--': 'M',
+            '-.': 'N',
+            '---': 'O',
+            '.--.': 'P',
+            '--.-': 'Q',
+            '.-.': 'R',
+            '...': 'S',
+            '-': 'T',
+            '..-': 'U',
+            '...-': 'V',
+            '.--': 'W',
+            '-..-': 'X',
+            '-.--': 'Y',
+            '--..': 'Z',
+            '-----': '0',
+            '.----': '1',
+            '..---': '2',
+            '...--': '3',
+            '....-': '4',
+            '.....': '5',
+            '-....': '6',
+            '--...': '7',
+            '---..': '8',
+            '----.': '9'
+        };
+    </script>
+</body>
+</html>
