@@ -12,14 +12,16 @@
             display: flex;
             align-items: center;
             justify-content: center;
-            background: linear-gradient(to right, #00FFFF, #800080);
+            transition: background-color 2s ease;
+            background-color: #333;
         }
 
         #container {
             text-align: center;
             padding: 20px;
             border-radius: 10px;
-            background-color: rgba(255, 255, 255, 0.8);
+            background-color: rgba(0, 0, 0, 0.8);
+            color: white;
         }
 
         input {
@@ -36,6 +38,7 @@
             border: none;
             border-radius: 5px;
             cursor: pointer;
+            margin: 5px;
         }
     </style>
 </head>
@@ -45,6 +48,10 @@
         <input type="text" id="inputText" placeholder="Enter Morse Code">
         <br>
         <button onclick="convertMorse()">Convert</button>
+        <button onclick="addDot()">Add Dot</button>
+        <button onclick="addDash()">Add Dash</button>
+        <button onclick="addSpace()">Add Space</button>
+        <button onclick="removeLast()">Remove Last</button>
     </div>
 
     <script>
@@ -67,6 +74,23 @@
             });
 
             return textArray.join('');
+        }
+
+        function addDot() {
+            document.getElementById('inputText').value += '.';
+        }
+
+        function addDash() {
+            document.getElementById('inputText').value += '-';
+        }
+
+        function addSpace() {
+            document.getElementById('inputText').value += ' ';
+        }
+
+        function removeLast() {
+            const currentText = document.getElementById('inputText').value;
+            document.getElementById('inputText').value = currentText.substring(0, currentText.length - 1);
         }
 
         const MorseCodeMap = {
@@ -107,6 +131,17 @@
             '---..': '8',
             '----.': '9'
         };
+
+        let colorIndex = 0;
+        const colors = ['#444', '#222', '#555', '#333', '#666'];
+
+        function changeBackgroundColor() {
+            document.body.style.backgroundColor = colors[colorIndex];
+            colorIndex = (colorIndex + 1) % colors.length;
+            setTimeout(changeBackgroundColor, 2000);
+        }
+
+        changeBackgroundColor();
     </script>
 </body>
 </html>
